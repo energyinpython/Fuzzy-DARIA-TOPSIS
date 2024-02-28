@@ -455,7 +455,7 @@ def main():
     dir = G_df[met.upper() + ' dir'].to_numpy()
 
     # update efficiencies using DARIA methodology
-    # final updated preferences
+    # final updated preferences (utility function values)
     final_S = daria._update_efficiency(S, G, dir)
 
     # TOPSIS has descending ranking from prefs
