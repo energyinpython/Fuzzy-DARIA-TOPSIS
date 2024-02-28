@@ -97,8 +97,8 @@ def draw_heatmap(df_new_heatmap, title):
     ---------
     >>> draw_heatmap(df_new_heatmap, title)
     """
-    plt.figure(figsize = (8, 5))
-    sns.set(font_scale = 1.2)
+    plt.figure(figsize = (10, 8))
+    sns.set(font_scale = 1.7)
     heatmap = sns.heatmap(df_new_heatmap, annot=True, fmt=".4f", cmap="PRGn",
                           linewidth=0.5, linecolor='w')
     plt.yticks(va="center")
@@ -303,7 +303,7 @@ def main():
 
     x1 = np.arange(0, len(str_years))
 
-    plt.figure(figsize = (7, 6))
+    plt.figure(figsize = (8, 7))
     for i in range(rankings_t.shape[0]):
         c = color[i]
         plt.plot(x1, rankings_t.iloc[i, :], 'o-', color = c, linewidth = 2)
@@ -311,18 +311,18 @@ def main():
         y_min, y_max = ax.get_ylim()
         x_min, x_max = ax.get_xlim()
         plt.annotate(country_names[i], (x_max - 0.15, rankings_t.iloc[i, -1]),
-                        fontsize = 12, #style='italic',
+                        fontsize = 14, #style='italic',
                         horizontalalignment='left')
 
-    plt.xlabel("Year", fontsize = 12)
-    plt.ylabel("Rank", fontsize = 12)
-    plt.xticks(x1, str_years, fontsize = 12)
-    plt.yticks(ticks, fontsize = 12)
+    plt.xlabel("Year", fontsize = 14)
+    plt.ylabel("Rank", fontsize = 14)
+    plt.xticks(x1, str_years, fontsize = 14)
+    plt.yticks(ticks, fontsize = 14)
     plt.xlim(x_min - 0.2, x_max + 0.2)
     plt.gca().invert_yaxis()
     
     plt.grid(True, linestyle = ':')
-    plt.title('F-TOPSIS Rankings')
+    plt.title('F-TOPSIS Rankings', fontsize = 14)
     plt.tight_layout()
     plt.savefig('./results/rankings_years_t' + '.pdf')
     plt.show()
@@ -344,7 +344,7 @@ def main():
 
     x1 = np.arange(0, len(str_years))
 
-    plt.figure(figsize = (7, 6))
+    plt.figure(figsize = (8, 7))
     for i in range(rankings_v.shape[0]):
         c = color[i]
         plt.plot(x1, rankings_v.iloc[i, :], 'o-', color = c, linewidth = 2)
@@ -352,18 +352,18 @@ def main():
         y_min, y_max = ax.get_ylim()
         x_min, x_max = ax.get_xlim()
         plt.annotate(country_names[i], (x_max - 0.15, rankings_v.iloc[i, -1]),
-                        fontsize = 12, #style='italic',
+                        fontsize = 14, #style='italic',
                         horizontalalignment='left')
 
-    plt.xlabel("Year", fontsize = 12)
-    plt.ylabel("Rank", fontsize = 12)
-    plt.xticks(x1, str_years, fontsize = 12)
-    plt.yticks(ticks, fontsize = 12)
+    plt.xlabel("Year", fontsize = 14)
+    plt.ylabel("Rank", fontsize = 14)
+    plt.xticks(x1, str_years, fontsize = 14)
+    plt.yticks(ticks, fontsize = 14)
     plt.xlim(x_min - 0.2, x_max + 0.2)
     plt.gca().invert_yaxis()
     
     plt.grid(True, linestyle = ':')
-    plt.title('F-VIKOR Rankings')
+    plt.title('F-VIKOR Rankings', fontsize = 14)
     plt.tight_layout()
     plt.savefig('./results/rankings_years_v' + '.pdf')
     plt.show()
@@ -385,7 +385,7 @@ def main():
 
     x1 = np.arange(0, len(str_years))
 
-    plt.figure(figsize = (7, 6))
+    plt.figure(figsize = (8, 7))
     for i in range(rankings_e.shape[0]):
         c = color[i]
         plt.plot(x1, rankings_e.iloc[i, :], 'o-', color = c, linewidth = 2)
@@ -393,18 +393,18 @@ def main():
         y_min, y_max = ax.get_ylim()
         x_min, x_max = ax.get_xlim()
         plt.annotate(country_names[i], (x_max - 0.15, rankings_e.iloc[i, -1]),
-                        fontsize = 12, #style='italic',
+                        fontsize = 14, #style='italic',
                         horizontalalignment='left')
 
-    plt.xlabel("Year", fontsize = 12)
-    plt.ylabel("Rank", fontsize = 12)
-    plt.xticks(x1, str_years, fontsize = 12)
-    plt.yticks(ticks, fontsize = 12)
+    plt.xlabel("Year", fontsize = 14)
+    plt.ylabel("Rank", fontsize = 14)
+    plt.xticks(x1, str_years, fontsize = 14)
+    plt.yticks(ticks, fontsize = 14)
     plt.xlim(x_min - 0.2, x_max + 0.2)
     plt.gca().invert_yaxis()
     
     plt.grid(True, linestyle = ':')
-    plt.title('F-EDAS Rankings')
+    plt.title('F-EDAS Rankings', fontsize = 14)
     plt.tight_layout()
     plt.savefig('./results/rankings_years_e' + '.pdf')
     plt.show()
@@ -431,20 +431,15 @@ def main():
     # calculate variability directions
     dir_list, dir_class = daria._direction(matrix, type)
 
-    # for next stage of research
+    # actions for next stage of research
     df_varia_fin[met.upper()] = list(var)
     df_varia_fin[met.upper() + ' dir'] = list(dir_class)
 
-    df_results = pd.DataFrame()
-    df_results['Ai'] = list(df.columns)
+    df_results = pd.DataFrame(index = df.columns)
     df_results['Variability'] = list(var)
     
     # list of directions
-    df_results['dir list'] = dir_list
-    
-    df_results.to_csv('./results/scores_t.csv')
-    df_varia_fin = df_varia_fin.rename_axis('Ai')
-    df_varia_fin.to_csv('./results/FINAL_T.csv')
+    df_results['Direction'] = dir_list
 
     # final calculation
     # data with alternatives' rankings' variability values calculated with Gini coeff and directions
@@ -465,6 +460,11 @@ def main():
 
     # TOPSIS has descending ranking from prefs
     rank = rank_preferences(final_S, reverse = True)
+
+    df_results['Fuzzy DARIA-TOPSIS pref'] = final_S
+    df_results['Fuzzy DARIA-TOPSIS rank'] = rank
+    df_results = df_results.rename_axis('Country')
+    df_results.to_csv('./results/final temporal results FUZZY DARIA-TOPSIS.csv')
 
     pref_summary['F-DARIA-TOPSIS'] = final_S
     rank_summary['F-DARIA-TOPSIS'] = rank
