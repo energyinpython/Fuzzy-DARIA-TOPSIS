@@ -246,13 +246,13 @@ def main():
 
 
 
-    preferences_t.to_csv('./results/preferences_t.csv')
-    preferences_v.to_csv('./results/preferences_v.csv')
-    preferences_e.to_csv('./results/preferences_e.csv')
+    preferences_t.to_csv('./results/fuzzy TOPSIS annual utility function values.csv')
+    preferences_v.to_csv('./results/fuzzy VIKOR annual utility function values.csv')
+    preferences_e.to_csv('./results/fuzzy EDAS annual utility function values.csv')
     
-    rankings_t.to_csv('./results/rankings_t.csv')
-    rankings_v.to_csv('./results/rankings_v.csv')
-    rankings_e.to_csv('./results/rankings_e.csv')
+    rankings_t.to_csv('./results/Fuzzy TOPSIS annual rankings.csv')
+    rankings_v.to_csv('./results/Fuzzy VIKOR annual rankings.csv')
+    rankings_e.to_csv('./results/Fuzzy EDAS annual rankings.csv')
     # Create dataframes for summary of preferences and rankings
     
     # AVG performances of alternatives
@@ -324,7 +324,7 @@ def main():
     plt.grid(True, linestyle = ':')
     plt.title('F-TOPSIS Rankings', fontsize = 14)
     plt.tight_layout()
-    plt.savefig('./results/rankings_years_t' + '.pdf')
+    plt.savefig('./results/rankings_years_fuzzy_TOPSIS' + '.pdf')
     plt.show()
     
     # PLOT  VIKOR =======================================================================
@@ -365,7 +365,7 @@ def main():
     plt.grid(True, linestyle = ':')
     plt.title('F-VIKOR Rankings', fontsize = 14)
     plt.tight_layout()
-    plt.savefig('./results/rankings_years_v' + '.pdf')
+    plt.savefig('./results/rankings_years_fuzzy_VIKOR' + '.pdf')
     plt.show()
 
     # PLOT  EDAS =======================================================================
@@ -406,7 +406,7 @@ def main():
     plt.grid(True, linestyle = ':')
     plt.title('F-EDAS Rankings', fontsize = 14)
     plt.tight_layout()
-    plt.savefig('./results/rankings_years_e' + '.pdf')
+    plt.savefig('./results/rankings_years_fuzzy_EDAS' + '.pdf')
     plt.show()
 
     
@@ -474,8 +474,8 @@ def main():
     # saving whole results
     pref_summary = pref_summary.rename_axis('Country')
     rank_summary = rank_summary.rename_axis('Country')
-    pref_summary.to_csv('./results/pref_summary.csv')
-    rank_summary.to_csv('./results/rank_summary.csv')
+    pref_summary.to_csv('./results/utility function values summary.csv')
+    rank_summary.to_csv('./results/rankings summary.csv')
 
 
     # plot
