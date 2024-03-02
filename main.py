@@ -324,7 +324,7 @@ def main():
     plt.grid(True, linestyle = ':')
     plt.title('F-TOPSIS Rankings', fontsize = 14)
     plt.tight_layout()
-    plt.savefig('./results/rankings_years_fuzzy_TOPSIS' + '.pdf')
+    plt.savefig('./results/rankings_annual_fuzzy_TOPSIS' + '.pdf')
     plt.show()
     
     # PLOT  VIKOR =======================================================================
@@ -365,7 +365,7 @@ def main():
     plt.grid(True, linestyle = ':')
     plt.title('F-VIKOR Rankings', fontsize = 14)
     plt.tight_layout()
-    plt.savefig('./results/rankings_years_fuzzy_VIKOR' + '.pdf')
+    plt.savefig('./results/rankings_annual_fuzzy_VIKOR' + '.pdf')
     plt.show()
 
     # PLOT  EDAS =======================================================================
@@ -406,7 +406,7 @@ def main():
     plt.grid(True, linestyle = ':')
     plt.title('F-EDAS Rankings', fontsize = 14)
     plt.tight_layout()
-    plt.savefig('./results/rankings_years_fuzzy_EDAS' + '.pdf')
+    plt.savefig('./results/rankings_annual_fuzzy_EDAS' + '.pdf')
     plt.show()
 
     
