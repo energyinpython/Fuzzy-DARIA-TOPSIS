@@ -185,43 +185,12 @@ def main():
         # matrix
         pre_matrix = data.to_numpy()
 
-        # Rozmiary bloków
+        # Block size - shape of fuzzy number, for example 3 for triangular fuzzy number, 4 for trapezoidal fuzzy number
         block_size = 3
 
-        # Przekształcenie tablicy w tablicę zagnieżdżoną
-
+        # Transforming an array into an array with nested fuzzy numbers with shape specified by block_size
         matrix = np.array([pre_matrix[i, j:j + block_size] for i in range(pre_matrix.shape[0]) for j in range(0, pre_matrix.shape[1], block_size)])
         matrix = matrix.reshape(pre_matrix.shape[0], -1, block_size)
-
-        # matrix = np.array([
-        #     [pre_matrix[0, 0:3], pre_matrix[0, 3:6], pre_matrix[0, 6:9], pre_matrix[0, 9:12], pre_matrix[0, 12:15], pre_matrix[0, 15:18], pre_matrix[0, 18:21], pre_matrix[0, 21:24], pre_matrix[0, 24:27]],
-        #     [pre_matrix[1, 0:3], pre_matrix[1, 3:6], pre_matrix[1, 6:9], pre_matrix[1, 9:12], pre_matrix[1, 12:15], pre_matrix[1, 15:18], pre_matrix[1, 18:21], pre_matrix[1, 21:24], pre_matrix[1, 24:27]],
-        #     [pre_matrix[2, 0:3], pre_matrix[2, 3:6], pre_matrix[2, 6:9], pre_matrix[2, 9:12], pre_matrix[2, 12:15], pre_matrix[2, 15:18], pre_matrix[2, 18:21], pre_matrix[2, 21:24], pre_matrix[2, 24:27]],
-        #     [pre_matrix[3, 0:3], pre_matrix[3, 3:6], pre_matrix[3, 6:9], pre_matrix[3, 9:12], pre_matrix[3, 12:15], pre_matrix[3, 15:18], pre_matrix[3, 18:21], pre_matrix[3, 21:24], pre_matrix[3, 24:27]],
-        #     [pre_matrix[4, 0:3], pre_matrix[4, 3:6], pre_matrix[4, 6:9], pre_matrix[4, 9:12], pre_matrix[4, 12:15], pre_matrix[4, 15:18], pre_matrix[4, 18:21], pre_matrix[4, 21:24], pre_matrix[4, 24:27]],
-        #     [pre_matrix[5, 0:3], pre_matrix[5, 3:6], pre_matrix[5, 6:9], pre_matrix[5, 9:12], pre_matrix[5, 12:15], pre_matrix[5, 15:18], pre_matrix[5, 18:21], pre_matrix[5, 21:24], pre_matrix[5, 24:27]],
-        #     [pre_matrix[6, 0:3], pre_matrix[6, 3:6], pre_matrix[6, 6:9], pre_matrix[6, 9:12], pre_matrix[6, 12:15], pre_matrix[6, 15:18], pre_matrix[6, 18:21], pre_matrix[6, 21:24], pre_matrix[6, 24:27]],
-        #     [pre_matrix[7, 0:3], pre_matrix[7, 3:6], pre_matrix[7, 6:9], pre_matrix[7, 9:12], pre_matrix[7, 12:15], pre_matrix[7, 15:18], pre_matrix[7, 18:21], pre_matrix[7, 21:24], pre_matrix[7, 24:27]],
-        #     [pre_matrix[8, 0:3], pre_matrix[8, 3:6], pre_matrix[8, 6:9], pre_matrix[8, 9:12], pre_matrix[8, 12:15], pre_matrix[8, 15:18], pre_matrix[8, 18:21], pre_matrix[8, 21:24], pre_matrix[8, 24:27]],
-        #     [pre_matrix[9, 0:3], pre_matrix[9, 3:6], pre_matrix[9, 6:9], pre_matrix[9, 9:12], pre_matrix[9, 12:15], pre_matrix[9, 15:18], pre_matrix[9, 18:21], pre_matrix[9, 21:24], pre_matrix[9, 24:27]],
-        #     [pre_matrix[10, 0:3], pre_matrix[10, 3:6], pre_matrix[10, 6:9], pre_matrix[10, 9:12], pre_matrix[10, 12:15], pre_matrix[10, 15:18], pre_matrix[10, 18:21], pre_matrix[10, 21:24], pre_matrix[10, 24:27]],
-        #     [pre_matrix[11, 0:3], pre_matrix[11, 3:6], pre_matrix[11, 6:9], pre_matrix[11, 9:12], pre_matrix[11, 12:15], pre_matrix[11, 15:18], pre_matrix[11, 18:21], pre_matrix[11, 21:24], pre_matrix[11, 24:27]],
-        #     [pre_matrix[12, 0:3], pre_matrix[12, 3:6], pre_matrix[12, 6:9], pre_matrix[12, 9:12], pre_matrix[12, 12:15], pre_matrix[12, 15:18], pre_matrix[12, 18:21], pre_matrix[12, 21:24], pre_matrix[12, 24:27]],
-        #     [pre_matrix[13, 0:3], pre_matrix[13, 3:6], pre_matrix[13, 6:9], pre_matrix[13, 9:12], pre_matrix[13, 12:15], pre_matrix[13, 15:18], pre_matrix[13, 18:21], pre_matrix[13, 21:24], pre_matrix[13, 24:27]],
-        #     [pre_matrix[14, 0:3], pre_matrix[14, 3:6], pre_matrix[14, 6:9], pre_matrix[14, 9:12], pre_matrix[14, 12:15], pre_matrix[14, 15:18], pre_matrix[14, 18:21], pre_matrix[14, 21:24], pre_matrix[14, 24:27]],
-        #     [pre_matrix[15, 0:3], pre_matrix[15, 3:6], pre_matrix[15, 6:9], pre_matrix[15, 9:12], pre_matrix[15, 12:15], pre_matrix[15, 15:18], pre_matrix[15, 18:21], pre_matrix[15, 21:24], pre_matrix[15, 24:27]],
-        #     [pre_matrix[16, 0:3], pre_matrix[16, 3:6], pre_matrix[16, 6:9], pre_matrix[16, 9:12], pre_matrix[16, 12:15], pre_matrix[16, 15:18], pre_matrix[16, 18:21], pre_matrix[16, 21:24], pre_matrix[16, 24:27]],
-        #     [pre_matrix[17, 0:3], pre_matrix[17, 3:6], pre_matrix[17, 6:9], pre_matrix[17, 9:12], pre_matrix[17, 12:15], pre_matrix[17, 15:18], pre_matrix[17, 18:21], pre_matrix[17, 21:24], pre_matrix[17, 24:27]],
-        #     [pre_matrix[18, 0:3], pre_matrix[18, 3:6], pre_matrix[18, 6:9], pre_matrix[18, 9:12], pre_matrix[18, 12:15], pre_matrix[18, 15:18], pre_matrix[18, 18:21], pre_matrix[18, 21:24], pre_matrix[18, 24:27]],
-        #     [pre_matrix[19, 0:3], pre_matrix[19, 3:6], pre_matrix[19, 6:9], pre_matrix[19, 9:12], pre_matrix[19, 12:15], pre_matrix[19, 15:18], pre_matrix[19, 18:21], pre_matrix[19, 21:24], pre_matrix[19, 24:27]],
-        #     [pre_matrix[20, 0:3], pre_matrix[20, 3:6], pre_matrix[20, 6:9], pre_matrix[20, 9:12], pre_matrix[20, 12:15], pre_matrix[20, 15:18], pre_matrix[20, 18:21], pre_matrix[20, 21:24], pre_matrix[20, 24:27]],
-        #     [pre_matrix[21, 0:3], pre_matrix[21, 3:6], pre_matrix[21, 6:9], pre_matrix[21, 9:12], pre_matrix[21, 12:15], pre_matrix[21, 15:18], pre_matrix[21, 18:21], pre_matrix[21, 21:24], pre_matrix[21, 24:27]],
-        #     [pre_matrix[22, 0:3], pre_matrix[22, 3:6], pre_matrix[22, 6:9], pre_matrix[22, 9:12], pre_matrix[22, 12:15], pre_matrix[22, 15:18], pre_matrix[22, 18:21], pre_matrix[22, 21:24], pre_matrix[22, 24:27]],
-        #     [pre_matrix[23, 0:3], pre_matrix[23, 3:6], pre_matrix[23, 6:9], pre_matrix[23, 9:12], pre_matrix[23, 12:15], pre_matrix[23, 15:18], pre_matrix[23, 18:21], pre_matrix[23, 21:24], pre_matrix[23, 24:27]],
-        #     [pre_matrix[24, 0:3], pre_matrix[24, 3:6], pre_matrix[24, 6:9], pre_matrix[24, 9:12], pre_matrix[24, 12:15], pre_matrix[24, 15:18], pre_matrix[24, 18:21], pre_matrix[24, 21:24], pre_matrix[24, 24:27]],
-        #     [pre_matrix[25, 0:3], pre_matrix[25, 3:6], pre_matrix[25, 6:9], pre_matrix[25, 9:12], pre_matrix[25, 12:15], pre_matrix[25, 15:18], pre_matrix[25, 18:21], pre_matrix[25, 21:24], pre_matrix[25, 24:27]],
-        #     [pre_matrix[26, 0:3], pre_matrix[26, 3:6], pre_matrix[26, 6:9], pre_matrix[26, 9:12], pre_matrix[26, 12:15], pre_matrix[26, 15:18], pre_matrix[26, 18:21], pre_matrix[26, 21:24], pre_matrix[26, 24:27]],
-        # ])
         
 
         # fuzzy weights
@@ -332,7 +301,7 @@ def main():
     plt.grid(True, linestyle = ':')
     plt.title('F-TOPSIS Rankings', fontsize = 14)
     plt.tight_layout()
-    plt.savefig('./results/rankings_annual_fuzzy_TOPSIS' + '.pdf')
+    plt.savefig('./results/rankings_annual_fuzzy_TOPSIS' + '.pdf', bbox_inches = 'tight')
     plt.show()
     
     # PLOT  VIKOR =======================================================================
@@ -373,7 +342,7 @@ def main():
     plt.grid(True, linestyle = ':')
     plt.title('F-VIKOR Rankings', fontsize = 14)
     plt.tight_layout()
-    plt.savefig('./results/rankings_annual_fuzzy_VIKOR' + '.pdf')
+    plt.savefig('./results/rankings_annual_fuzzy_VIKOR' + '.pdf', bbox_inches = 'tight')
     plt.show()
 
     # PLOT  EDAS =======================================================================
@@ -414,7 +383,7 @@ def main():
     plt.grid(True, linestyle = ':')
     plt.title('F-EDAS Rankings', fontsize = 14)
     plt.tight_layout()
-    plt.savefig('./results/rankings_annual_fuzzy_EDAS' + '.pdf')
+    plt.savefig('./results/rankings_annual_fuzzy_EDAS' + '.pdf', bbox_inches = 'tight')
     plt.show()
 
     
